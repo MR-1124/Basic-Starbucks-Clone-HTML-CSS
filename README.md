@@ -13,7 +13,7 @@ A basic front-end clone of the Starbucks homepage built using HTML and CSS. This
 2. Open the `index.html` file in your browser to view the project.
 
 ## 📸 Screenshots
-![Homepage](screenshots/1.png)
+![Homepage](screenshot/1.png)
 
 ## 👨‍💻 Author
 Mayan Roy
