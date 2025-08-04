@@ -12,6 +12,9 @@ A basic front-end clone of the Starbucks homepage built using HTML and CSS. This
 1. Download or clone the repository.
 2. Open the `index.html` file in your browser to view the project.
 
+## Live Demo
+![Starbucks](https://mr-1124.github.io/Basic-Starbucks-Clone-HTML-CSS/)
+
 ## 📸 Screenshots
 ![Homepage](screenshot/1.png)
 
