@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Starbucks Coffee — Clone</title>
+  <title>Starbucks Coffee — Modern Redesign</title>
 
   <!-- Fonts & icons -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -13,16 +13,21 @@
   <style>
     /* VARIABLES & RESET */
     :root{
-      --green-dark: #32462F;
-      --green-medium: #006242;
-      --tan: #D0D0A9;
+      --green-dark: #1e3932;
+      --green-medium: #00704a;
+      --green-light: #d4e9e2;
+      --tan: #d0d0a9;
       --white: #ffffff;
       --black: #000000;
       --muted: #808080;
       --container-max: 1200px;
       --gap: 20px;
-      --border-radius: 12px;
-      --transition: all 0.3s ease;
+      --border-radius: 16px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --glass-bg: rgba(255, 255, 255, 0.25);
+      --glass-border: rgba(255, 255, 255, 0.18);
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+      --shadow-hover: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
     }
 
     * { 
@@ -37,12 +42,13 @@
     
     body {
       font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      line-height: 1.5;
+      line-height: 1.6;
       color: #111;
-      background: #fff;
+      background: linear-gradient(135deg, #f9f9f9 0%, #e6f2ef 50%, #d4e9e2 100%);
       -webkit-font-smoothing: antialiased;
       display: flex;
       flex-direction: column;
+      background-attachment: fixed;
     }
 
     /* Layout container (centered) */
@@ -56,11 +62,14 @@
     /* HEADER */
     .site-header {
       width: 100%;
-      background: #fff;
-      box-shadow: 0 4px 4px -4px rgba(0,0,0,0.25);
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--glass-border);
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .header-inner {
@@ -79,9 +88,15 @@
     }
 
     #logo {
-      width: 46px;
-      height: auto;
+      width: 50px;
+      height: 50px;
       display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+      transition: var(--transition);
+    }
+    
+    #logo:hover {
+      transform: scale(1.05);
     }
 
     /* Desktop nav */
@@ -95,14 +110,32 @@
       font-weight: 700;
       letter-spacing: 0.6px;
       color: #111;
-      padding: 6px 8px;
-      border-radius: 6px;
+      padding: 8px 16px;
+      border-radius: 20px;
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .top-nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: left 0.5s;
+    }
+    
+    .top-nav a:hover::before {
+      left: 100%;
     }
     
     .top-nav a:hover { 
       color: var(--green-dark); 
-      background: rgba(50,70,47,0.04); 
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
 
     /* Header actions */
@@ -119,11 +152,14 @@
       text-decoration: none;
       font-weight: 600;
       color: #111;
+      padding: 8px 16px;
+      border-radius: 20px;
       transition: var(--transition);
     }
     
     .store-link:hover {
       color: var(--green-dark);
+      background: rgba(255, 255, 255, 0.5);
     }
     
     .store-link .store-text { 
@@ -132,38 +168,46 @@
 
     .head-btn {
       border-radius: 40px;
-      padding: 8px 14px;
+      padding: 10px 20px;
       font-weight: 600;
       background: transparent;
       border: 1px solid transparent;
       cursor: pointer;
       transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
 
     /* variants */
     .head-btn.ghost { 
-      background: #fff; 
-      border: 1px solid #111; 
+      background: rgba(255, 255, 255, 0.5); 
+      border: 1px solid rgba(0, 0, 0, 0.1); 
       color: #111; 
+      backdrop-filter: blur(5px);
     }
     
     .head-btn.ghost:hover {
-      background: #f5f5f5;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
     }
     
     .head-btn.solid { 
-      background: #111; 
+      background: var(--green-medium); 
       color: #fff; 
-      border: 1px solid #111; 
+      border: 1px solid var(--green-medium);
+      box-shadow: 0 4px 12px rgba(0, 112, 74, 0.3);
     }
     
     .head-btn.solid:hover {
-      background: #333;
+      background: var(--green-dark);
+      box-shadow: 0 6px 20px rgba(0, 112, 74, 0.4);
+      transform: translateY(-2px);
     }
 
     .head-btn:active,
     .head-btn:focus { 
-      transform: translateY(0.5px); 
+      transform: translateY(0); 
       outline: none; 
     }
 
@@ -174,16 +218,18 @@
       justify-content: center;
       width: 44px;
       height: 44px;
-      border-radius: 10px;
-      border: 1px solid transparent;
-      background: transparent;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(5px);
       cursor: pointer;
       margin-left: 4px;
       transition: var(--transition);
     }
     
     .nav-toggle:hover {
-      background: rgba(0,0,0,0.05);
+      background: rgba(255, 255, 255, 0.8);
+      transform: rotate(90deg);
     }
     
     .nav-toggle i { 
@@ -192,7 +238,7 @@
 
     /* MAIN SECTION */
     .main-section {
-      padding: 20px 0;
+      padding: 30px 0;
       flex: 1;
     }
 
@@ -201,17 +247,31 @@
       display: flex;
       flex-direction: column;
       gap: 0;
-      margin-bottom: 28px;
-      border: 1px solid #eee;
-      overflow: hidden;
+      margin-bottom: 32px;
       border-radius: var(--border-radius);
-      background: #fff;
+      overflow: hidden;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
       transition: var(--transition);
+      position: relative;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
     }
 
     .card:hover { 
-      transform: translateY(-4px); 
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06); 
+      transform: translateY(-8px); 
+      box-shadow: var(--shadow-hover);
     }
 
     .card.reverse { 
@@ -233,6 +293,17 @@
       background-position: center;
       background-repeat: no-repeat;
       width: 100%;
+      position: relative;
+    }
+    
+    .card-image::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, transparent 100%);
     }
 
     /* content */
@@ -240,39 +311,83 @@
       text-align: center;
       color: #fff;
       padding: 36px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-content::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    
+    .card-content:hover::before {
+      opacity: 1;
     }
 
     .card-content h1 {
       font-size: 28px;
-      line-height: 1.1;
-      margin-bottom: 12px;
+      line-height: 1.2;
+      margin-bottom: 16px;
       letter-spacing: 0.5px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 1;
     }
     
     .card-content p {
       font-size: 16px;
       max-width: 680px;
-      margin: 0 auto 20px;
+      margin: 0 auto 24px;
       font-weight: 500;
       color: rgba(255,255,255,0.95);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1;
     }
 
     /* buttons */
     .button {
       display: inline-block;
-      padding: 10px 18px;
+      padding: 12px 24px;
       border-radius: 999px;
       text-decoration: none;
       border: 1px solid rgba(255,255,255,0.9);
       color: #fff;
       font-weight: 700;
       transition: var(--transition);
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .button:hover::before {
+      left: 100%;
     }
     
     .button:hover { 
       transform: translateY(-3px); 
       color: var(--green-dark); 
       background: #fff; 
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     .button.dark {
@@ -283,13 +398,22 @@
     
     .button.dark:hover {
       background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     /* color classes */
-    .green { background-color: var(--green-dark); }
-    .tan { background-color: var(--tan); color: var(--green-dark); }
-    .lightgreen { background-color: var(--green-medium); }
+    .green { 
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-medium) 100%);
+    }
+    
+    .tan { 
+      background: linear-gradient(135deg, var(--tan) 0%, #e8e8c9 100%);
+      color: var(--green-dark); 
+    }
+    
+    .lightgreen { 
+      background: linear-gradient(135deg, var(--green-medium) 0%, #008b5d 100%);
+    }
 
     /* SMALL CARD variant (used in original) */
     .card-image.small { min-height: 34vh; }
@@ -299,11 +423,14 @@
 
     /* INFO CARD */
     .info-card {
-      margin: 10px 0 36px;
-      padding: 18px;
-      background: #fff;
+      margin: 20px 0 40px;
+      padding: 24px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: var(--border-radius);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      box-shadow: var(--shadow);
+      border: 1px solid var(--glass-border);
     }
     
     .main-info { 
@@ -320,22 +447,43 @@
 
     /* FOOTER */
     .footer { 
-      padding: 18px 0 30px; 
+      padding: 30px 0 40px; 
       color: #222; 
-      background: #f9f9f9;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid var(--glass-border);
     }
     
     .footer-container {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      gap: 24px;
     }
     
     .footer-column h4 { 
       font-family: "Poppins", sans-serif; 
       font-size: 18px; 
-      margin-bottom: 12px; 
-      font-weight: 500; 
+      margin-bottom: 16px; 
+      font-weight: 600; 
+      color: var(--green-dark);
+      position: relative;
+      display: inline-block;
+    }
+    
+    .footer-column h4::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 30px;
+      height: 2px;
+      background: var(--green-medium);
+      transition: width 0.3s;
+    }
+    
+    .footer-column:hover h4::after {
+      width: 100%;
     }
     
     .footer-column ul { 
@@ -344,7 +492,7 @@
     }
     
     .footer-column ul li { 
-      margin-bottom: 8px; 
+      margin-bottom: 10px; 
     }
     
     .footer-column ul li a { 
@@ -353,24 +501,26 @@
       font-weight: 500; 
       font-size: 14px; 
       transition: var(--transition);
+      display: inline-block;
+      padding: 2px 0;
     }
     
     .footer-column ul li a:hover { 
-      text-decoration: underline; 
       color: var(--green-medium);
+      transform: translateX(5px);
     }
 
     /* bottom footer */
     .solid { 
-      border-top: 1px solid #e6e6e6; 
-      margin-top: 22px; 
+      border-top: 1px solid rgba(0, 0, 0, 0.1); 
+      margin-top: 30px; 
     }
     
     .bottom-footer {
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding-top: 18px;
+      gap: 20px;
+      padding-top: 24px;
     }
     
     .social-icons { 
@@ -379,28 +529,30 @@
     }
     
     .social-icons a {
-      width: 36px; 
-      height: 36px; 
+      width: 40px; 
+      height: 40px; 
       display: inline-flex; 
       align-items: center; 
       justify-content:center;
-      background: #111; 
+      background: var(--green-medium); 
       color: #fff; 
       border-radius: 50%; 
       text-decoration: none; 
-      font-size: 14px;
+      font-size: 16px;
       transition: var(--transition);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
     
     .social-icons a:hover { 
-      transform: scale(1.08); 
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+      transform: translateY(-4px) scale(1.1); 
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+      background: var(--green-dark);
     }
 
     .policy-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 16px;
     }
     
     .policy-links a { 
@@ -408,11 +560,13 @@
       text-decoration: none; 
       font-size: 13px; 
       transition: var(--transition);
+      padding: 4px 8px;
+      border-radius: 4px;
     }
     
     .policy-links a:hover { 
-      text-decoration: underline; 
       color: var(--green-medium);
+      background: rgba(255, 255, 255, 0.5);
     }
 
     .copyright { 
@@ -510,7 +664,7 @@
       }
 
       .card-content h1 { 
-        font-size: 46px; 
+        font-size: 42px; 
       }
       
       .card-content p { 
@@ -529,7 +683,7 @@
       }
 
       .policy-links { 
-        gap: 16px; 
+        gap: 20px; 
       }
     }
 
@@ -547,51 +701,71 @@
     /* NAV small-screen behaviour */
     #main-nav {
       position: absolute;
-      top: 68px;
+      top: 72px;
       right: 18px;
-      background: #fff;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
       border-radius: var(--border-radius);
-      border: 1px solid rgba(0,0,0,0.06);
+      border: 1px solid var(--glass-border);
       display: none;
       flex-direction: column;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.08);
-      min-width: 180px;
+      box-shadow: var(--shadow-hover);
+      min-width: 200px;
       overflow: hidden;
       z-index: 100;
     }
     
     #main-nav.open { 
       display: flex; 
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     #main-nav a {
       display: block;
-      padding: 12px 18px;
+      padding: 14px 20px;
       color: #111;
       text-decoration: none;
       font-weight: 600;
       transition: var(--transition);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    #main-nav a:last-child {
+      border-bottom: none;
     }
     
     #main-nav a:hover { 
-      background: rgba(0,0,0,0.03); 
+      background: rgba(255, 255, 255, 0.5); 
+      padding-left: 24px;
     }
 
     /* Accessibility focus styles */
     a:focus, button:focus { 
-      outline: 3px solid rgba(50,70,47,0.18); 
+      outline: 3px solid rgba(0, 112, 74, 0.3); 
       outline-offset: 2px; 
     }
 
     /* Small fixes for very small devices */
     @media (max-width: 420px) {
       .card-content h1 { 
-        font-size: 22px; 
+        font-size: 24px; 
       }
       
       .card-content p { 
         font-size: 14px; 
-        margin-bottom: 12px; 
+        margin-bottom: 16px; 
       }
       
       .container { 
@@ -603,7 +777,7 @@
       }
       
       .head-btn { 
-        padding: 6px 10px; 
+        padding: 8px 14px; 
         font-size: 13px; 
       }
       
@@ -613,6 +787,11 @@
       
       .footer-container {
         grid-template-columns: 1fr;
+      }
+      
+      .policy-links {
+        flex-direction: column;
+        gap: 8px;
       }
     }
   </style>
@@ -664,116 +843,4 @@
       <div class="card-content tan small">
         <h1>It starts with free</h1>
         <p>Enjoy a <strong>free handcrafted drink</strong> when you make a qualifying purchase during your first week as a Starbucks® Rewards member.</p>
-        <a href="#" class="button dark">Join now</a>
-      </div>
-    </section>
-
-    <!-- Card 3 -->
-    <section class="card">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98053.jpg');" role="img" aria-label="Order ahead at airports"></div>
-      <div class="card-content green">
-        <h1>Order ahead. Pick up and fly.</h1>
-        <p>Make summer travel more chill with the Starbucks® app. Just find a store at an airport, order your favorites, pick up and go.</p>
-        <a href="#" class="button">Find a store</a>
-      </div>
-    </section>
-
-    <!-- Card 4 -->
-    <section class="card reverse">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98046.jpg');" role="img" aria-label="FARM Rio collaboration"></div>
-      <div class="card-content green">
-        <h1>FARM Rio + Starbucks®</h1>
-        <p>We've teamed up with Brazilian fashion brand FARM Rio for an exclusive merch collection inspired by the beauty and culture of Rio de Janeiro.</p>
-        <a href="#" class="button">Learn more</a>
-      </div>
-    </section>
-
-    <!-- Card 5 -->
-    <section class="card">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99432.jpg');" role="img" aria-label="Free refills while you stay"></div>
-      <div class="card-content lightgreen">
-        <h1>Free refills while you stay</h1>
-        <p>When you stay to enjoy your handcrafted or brewed drink in the café, refills of hot and iced brewed coffee or tea are on us.</p>
-        <a href="#" class="button">Learn more</a>
-      </div>
-    </section>
-  </main>
-
-  <section class="info-card container">
-    <div class="main-info">
-      <p id="first-info">
-        *Valid for new Starbucks Rewards members for 7 days from sign up. Coupon will be available in the offers tab of your Starbucks app following sign up and may take up to 48 hours to arrive. Good at participating U.S. stores for a handcrafted menu-sized beverage with qualifying purchase ($8 max value). Qualifying purchase excludes alcohol, Starbucks Card and Card reloads. Limit one. Cannot be combined with other offers or discounts. Excludes delivery services. Sign up by 9/28/2025.*
-      </p>
-
-      <p id="second-info">
-        **Free refills of hot and iced brewed coffee or tea during same store visit. Excludes Cold Brew, Nitro Cold Brew, Iced Tea Lemonade, and flavored Iced Tea and Starbucks Refreshers® base. At participating stores. Visit starbucks.com/refills to learn more.**
-      </p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer-container">
-      <div class="footer-column">
-        <h4>About Us</h4>
-        <ul>
-          <li><a href="#">Our Company</a></li>
-          <li><a href="#">Our Coffee</a></li>
-          <li><a href="#">About Starbucks</a></li>
-          <li><a href="#">Starbucks Archive</a></li>
-          <li><a href="#">Investor Relations</a></li>
-          <li><a href="#">Customer Service</a></li>
-          <li><a href="#">Contact Us</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Careers</h4>
-        <ul>
-          <li><a href="#">Culture and Values</a></li>
-          <li><a href="#">Belonging at Starbucks</a></li>
-          <li><a href="#">College Achievement Plan</a></li>
-          <li><a href="#">Alumni Community</a></li>
-          <li><a href="#">U.S Careers</a></li>
-          <li><a href="#">International Careers</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Social Impact</h4>
-        <ul>
-          <li><a href="#">Communities</a></li>
-          <li><a href="#">Starbucks Foundation</a></li>
-          <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Environmental and Social Impact Reporting</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>For Business Partners</h4>
-        <ul>
-          <li><a href="#">Landlord Support Center</a></li>
-          <li><a href="#">Suppliers</a></li>
-          <li><a href="#">Corporate Gift Card Sales</a></li>
-          <li><a href="#">Office and Foodservice Coffee</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Order and Pick Up</h4>
-        <ul>
-          <li><a href="#">Order on the App</a></li>
-          <li><a href="#">Order on the Web</a></li>
-          <li><a href="#">Delivery</a></li>
-          <li><a href="#">Order and Pick Up Options</a></li>
-          <li><a href="#">Explore and Find Coffee for Home</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <hr class="solid">
-
-    <div class="bottom-footer container">
-      <div class="social-icons" aria-hidden="false" aria-label="Social links">
-        <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" a
+     
