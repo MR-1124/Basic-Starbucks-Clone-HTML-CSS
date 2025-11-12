@@ -1,204 +1,216 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Starucks Coffee</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Noto+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic" rel="stylesheet" />
-      <link rel="stylesheet" href="fonts/style.css" type="text/css">
-      <link rel="stylesheet" href="styles.css">
-      <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
-      
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Starbucks Coffee — Clone</title>
+
+  <!-- Fonts & icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-      <header>
-            <div class="header-left">
-                  <a href="#"><img id="logo" src="starbucks.png" alt="logo"></a>
-                  <div class="top-nav">
-                        <a href="#">MENU</a>
-                        <a href="#">REWARDS</a>
-                        <a href="#">GIFT CARDS</a>
-                  </div>
-
-            </div>
-            <div class="header-right">
-                  <a href="#" class="store-link">
-                        <i class="fas fas fa-map-marker-alt"></i>
-                        Find a store
-                  </a>
-                  <button class="head-btn" id="btn-signin">
-                        Sign in
-                  </button>
-                  <button class="head-btn" id="btn-signup">
-                        Join now
-                  </button>
-
-            </div>
-      </header>
-
-      <div class="main-section">
-
-            <div class="card">
-                  <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99412.jpg');"></div>
-                  <div class="card-content green">
-                        <h1>See you on the <br>patio</br></h1>
-                        <p>Soak up the season with Summer–Berry Refreshers and Iced Horchata Oatmilk Shaken Espresso. Enjoy these cool favorites while you can. Here for a limited time.</p>
-                        <a href="#" class="button">View the menu</a>
-                  </div>
-            </div>
-
-            <div class="card reverse">
-                  <div class="card-image small" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98124.jpg');"></div>
-                  <div class="card-content tan small">
-                        <h1>It starts with free</h1>
-                        <p>Enjoy a <b>free handcrafted drink</b> when you make a qualifying purchase during your first week as a Starbucks® Rewards member.</p>
-                        <a href="#" class="button">Join now</a>
-                  </div>
-            </div>
-
-            <div class="card">
-                  <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98053.jpg');"></div>
-                  <div class="card-content green">
-                        <h1>Order ahead. Pick <br>up and fly.</h1>
-                        <p>Make summer travel more chill with the Starbucks® app. Just find a store at an airport, order your favorites, pick up and go.</p>
-                        <a href="#" class="button">Find a store</a>
-                  </div>
-            </div>
-
-            <div class="card reverse">
-                  <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98046.jpg');"></div>
-                  <div class="card-content green">
-                        <h1>FARM Rio + <br>Starbucks®</h1>
-                        <p>We’ve teamed up with Brazilian fashion brand FARM Rio for an exclusive merch collection inspired by the beauty and culture of Rio de Janeiro.</p>
-                        <a href="#" class="button">Learn more</a>
-                  </div>
-            </div>
-
-            <div class="card">
-                  <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99432.jpg');"></div>
-                  <div class="card-content lightgreen">
-                        <h1>Free refills while <br>you stay</h1>
-                        <p>When you stay to enjoy your handcrafted or brewed drink in the café, refills of hot and iced brewed coffee or tea are on us.</p>
-                        <a href="#" class="button">Learn more</a>
-                  </div>
-            </div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="#" aria-label="Starbucks home">
+          <img id="logo" src="starbucks.png" alt="Starbucks logo">
+        </a>
+        <nav class="top-nav" id="main-nav" aria-label="Primary">
+          <a href="#">Menu</a>
+          <a href="#">Rewards</a>
+          <a href="#">Gift Cards</a>
+        </nav>
       </div>
 
+      <div class="header-actions">
+        <a class="store-link" href="#" aria-label="Find a store">
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <span class="store-text">Find a store</span>
+        </a>
 
-      <div class="info-card">
+        <button class="head-btn ghost" id="btn-signin">Sign in</button>
+        <button class="head-btn solid" id="btn-signup">Join now</button>
 
-            <div class="main-info">
-                  <p id="first-info">
-                        *Valid for new Starbucks Rewards members for 7 days from sign up. Coupon will be available in the offers tab of your Starbucks app following sign up and may take up to 48 hours to arrive. Good at participating U.S. stores for a handcrafted menu-sized beverage with qualifying purchase ($8 max value). Qualifying purchase excludes alcohol, Starbucks Card and Card reloads. Limit one. Cannot be combined with other offers or discounts. Excludes delivery services. Sign up by 9/28/2025.*
-                  </p>
+        <button id="nav-toggle" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
 
-                  <br>
-                  <br>
+  <main class="main-section container">
+    <!-- Card 1 -->
+    <section class="card">
+      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99412.jpg');" role="img" aria-label="Patio and drinks"></div>
+      <div class="card-content green">
+        <h1>See you on the patio</h1>
+        <p>Soak up the season with Summer–Berry Refreshers and Iced Horchata Oatmilk Shaken Espresso. Enjoy these cool favorites while you can. Here for a limited time.</p>
+        <a href="#" class="button">View the menu</a>
+      </div>
+    </section>
 
-                  <p id="second-info">
-                        **Free refills of hot and iced brewed coffee or tea during same store visit. Excludes Cold Brew, Nitro Cold Brew, Iced Tea Lemonade, and flavored Iced Tea and Starbucks Refreshers® base. At participating stores. Visit starbucks.com/refills to learn more.
-                  </p>
-            </div>
+    <!-- Card 2 -->
+    <section class="card reverse">
+      <div class="card-image small" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98124.jpg');" role="img" aria-label="Rewards free handcrafted drink"></div>
+      <div class="card-content tan small">
+        <h1>It starts with free</h1>
+        <p>Enjoy a <strong>free handcrafted drink</strong> when you make a qualifying purchase during your first week as a Starbucks® Rewards member.</p>
+        <a href="#" class="button dark">Join now</a>
+      </div>
+    </section>
 
+    <!-- Card 3 -->
+    <section class="card">
+      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98053.jpg');" role="img" aria-label="Order ahead at airports"></div>
+      <div class="card-content green">
+        <h1>Order ahead. Pick up and fly.</h1>
+        <p>Make summer travel more chill with the Starbucks® app. Just find a store at an airport, order your favorites, pick up and go.</p>
+        <a href="#" class="button">Find a store</a>
+      </div>
+    </section>
 
+    <!-- Card 4 -->
+    <section class="card reverse">
+      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98046.jpg');" role="img" aria-label="FARM Rio collaboration"></div>
+      <div class="card-content green">
+        <h1>FARM Rio + Starbucks®</h1>
+        <p>We’ve teamed up with Brazilian fashion brand FARM Rio for an exclusive merch collection inspired by the beauty and culture of Rio de Janeiro.</p>
+        <a href="#" class="button">Learn more</a>
+      </div>
+    </section>
 
+    <!-- Card 5 -->
+    <section class="card">
+      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99432.jpg');" role="img" aria-label="Free refills while you stay"></div>
+      <div class="card-content lightgreen">
+        <h1>Free refills while you stay</h1>
+        <p>When you stay to enjoy your handcrafted or brewed drink in the café, refills of hot and iced brewed coffee or tea are on us.</p>
+        <a href="#" class="button">Learn more</a>
+      </div>
+    </section>
+  </main>
+
+  <section class="info-card container">
+    <div class="main-info">
+      <p id="first-info">
+        *Valid for new Starbucks Rewards members for 7 days from sign up. Coupon will be available in the offers tab of your Starbucks app following sign up and may take up to 48 hours to arrive. Good at participating U.S. stores for a handcrafted menu-sized beverage with qualifying purchase ($8 max value). Qualifying purchase excludes alcohol, Starbucks Card and Card reloads. Limit one. Cannot be combined with other offers or discounts. Excludes delivery services. Sign up by 9/28/2025.*
+      </p>
+
+      <p id="second-info">
+        **Free refills of hot and iced brewed coffee or tea during same store visit. Excludes Cold Brew, Nitro Cold Brew, Iced Tea Lemonade, and flavored Iced Tea and Starbucks Refreshers® base. At participating stores. Visit starbucks.com/refills to learn more.**
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-column">
+        <h4>About Us</h4>
+        <ul>
+          <li><a href="#">Our Company</a></li>
+          <li><a href="#">Our Coffee</a></li>
+          <li><a href="#">About Starbucks</a></li>
+          <li><a href="#">Starbucks Archive</a></li>
+          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Customer Service</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
       </div>
 
-      <footer class="footer">
-
-            <div class="footer-container">
-
-                  <!-- Column 1-->
-                  <div class="footer-column">
-                        <h4>About Us</h4>
-                        <ul>
-                              <li><a href="#">Our Company</a></li>
-                              <li><a href="#">Our Coffee</a></li>
-                              <li><a href="#">About Starbucks</a></li>
-                              <li><a href="#">Starucks Archive</a></li>
-                              <li><a href="#">Investor Relations</a></li>
-                              <li><a href="#">Customer Service</a></li>
-                              <li><a href="#">Contact Us</a></li>
-
-                        </ul>
-                  </div>
-
-                  <!-- Column 2-->
-                  <div class="footer-column">
-                        <h4>Careers Us</h4>
-                        <ul>
-                              <li><a href="#">Culture and Values</a></li>
-                              <li><a href="#">Belonging at Starbucks</a></li>
-                              <li><a href="#">College Achievement Plan</a></li>
-                              <li><a href="#">Alumni Community</a></li>
-                              <li><a href="#">U.S Careers</a></li>
-                              <li><a href="#">International Careers</a></li>
-                        </ul>
-                  </div>
-
-                  <!-- Column 3-->
-                  <div class="footer-column">
-                        <h4>Social Impact</h4>
-                        <ul>
-                              <li><a href="#">Communities</a></li>
-                              <li><a href="#">Starbucks Foundation</a></li>
-                              <li><a href="#">Sustainability</a></li>
-                              <li><a href="#">Environmental and Social Impact Reporting</a></li>
-                        </ul>
-                  </div>
-
-
-                  <!-- Column 4-->
-                  <div class="footer-column">
-                        <h4>For Business Partners</h4>
-                        <ul>
-                              <li><a href="#">Landlord Support Center</a></li>
-                              <li><a href="#">Suppliers</a></li>
-                              <li><a href="#">Corporate Gift Card Sales</a></li>
-                              <li><a href="#">Office and Foodservice Coffee</a></li>
-                        </ul>
-                  </div>
-
-
-
-                  <div class="footer-column">
-                        <h4>Order and Pick Up</h4>
-                        <ul>
-                              <li><a href="#">Order on the App</a></li>
-                              <li><a href="#">Order on the Web</a></li>
-                              <li><a href="#">Delivery</a></li>
-                              <li><a href="#">Order and Pick Up Options</a></li>
-                              <li><a href="#">Explore and Find Coffee for Home</a></li>
-                        </ul>
-                  </div>
-            </div>
-            <hr class="solid">
-      </footer>
-      <div class="bottom-footer">
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-spotify"></i></a>
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-pinterest-p"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-youtube"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></i></a>
-            </div>
-          
-            <div class="policy-links">
-              <a href="#">Privacy Notice</a>
-              <a href="#">Consumer Health Privacy Notice</a>
-              <a href="#">Terms of Use</a>
-              <a href="#">Do Not Share My Personal Information</a>
-              <a href="#">CA Supply Chain Act</a>
-              <a href="#">Accessibility</a>
-              <a href="#">Cookie Preferences</a>
-            </div>
-          
-            <div class="copyright">
-              © 2025 Starbucks Coffee Company. All rights reserved.
-            </div>
+      <div class="footer-column">
+        <h4>Careers</h4>
+        <ul>
+          <li><a href="#">Culture and Values</a></li>
+          <li><a href="#">Belonging at Starbucks</a></li>
+          <li><a href="#">College Achievement Plan</a></li>
+          <li><a href="#">Alumni Community</a></li>
+          <li><a href="#">U.S Careers</a></li>
+          <li><a href="#">International Careers</a></li>
+        </ul>
       </div>
-      
+
+      <div class="footer-column">
+        <h4>Social Impact</h4>
+        <ul>
+          <li><a href="#">Communities</a></li>
+          <li><a href="#">Starbucks Foundation</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Environmental and Social Impact Reporting</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>For Business Partners</h4>
+        <ul>
+          <li><a href="#">Landlord Support Center</a></li>
+          <li><a href="#">Suppliers</a></li>
+          <li><a href="#">Corporate Gift Card Sales</a></li>
+          <li><a href="#">Office and Foodservice Coffee</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Order and Pick Up</h4>
+        <ul>
+          <li><a href="#">Order on the App</a></li>
+          <li><a href="#">Order on the Web</a></li>
+          <li><a href="#">Delivery</a></li>
+          <li><a href="#">Order and Pick Up Options</a></li>
+          <li><a href="#">Explore and Find Coffee for Home</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <hr class="solid">
+
+    <div class="bottom-footer container">
+      <div class="social-icons" aria-hidden="false" aria-label="Social links">
+        <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+
+      <div class="policy-links">
+        <a href="#">Privacy Notice</a>
+        <a href="#">Consumer Health Privacy Notice</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Do Not Share My Personal Information</a>
+        <a href="#">CA Supply Chain Act</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Cookie Preferences</a>
+      </div>
+
+      <div class="copyright">
+        © 2025 Starbucks Coffee Company. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Small JavaScript for mobile nav toggle -->
+  <script>
+    const navToggle = document.getElementById('nav-toggle');
+    const mainNav = document.getElementById('main-nav');
+
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', String(!expanded));
+      mainNav.classList.toggle('open');
+    });
+
+    // Close nav on larger resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        mainNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
