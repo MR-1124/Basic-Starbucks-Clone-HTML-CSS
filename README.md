@@ -16,7 +16,7 @@ A basic front-end clone of the Starbucks homepage built using HTML and CSS. This
 [Starbucks][https://mr-1124.github.io/Basic-Starbucks-Clone-HTML-CSS/]
 
 ## 📸 Screenshots
-![Homepage](screenshot/1.png)
+![Homepage](screenshot-1.png)
 
 ## 👨‍💻 Author
 Mayan Roy
