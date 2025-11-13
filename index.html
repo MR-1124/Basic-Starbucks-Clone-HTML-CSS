@@ -1,123 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Starbucks Coffee — Modern Redesign</title>
-
-  <!-- Fonts & icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starbucks Coffee Company</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Main stylesheet -->
   <style>
-    /* VARIABLES & RESET */
-    :root{
+    :root {
+      --green-primary: #00704a;
       --green-dark: #1e3932;
-      --green-medium: #00704a;
       --green-light: #d4e9e2;
-      --tan: #d0d0a9;
+      --green-accent: #00a862;
+      --tan-light: #f2f0eb;
+      --tan-dark: #d4c5a0;
       --white: #ffffff;
       --black: #000000;
-      --muted: #808080;
-      --container-max: 1200px;
-      --gap: 20px;
-      --border-radius: 16px;
-      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      --glass-bg: rgba(255, 255, 255, 0.25);
-      --glass-border: rgba(255, 255, 255, 0.18);
-      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-      --shadow-hover: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+      --gray: #666666;
+      --gray-light: #f7f7f7;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+      --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+      --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-fast: all 0.15s ease;
     }
 
-    * { 
-      box-sizing: border-box; 
-      margin: 0; 
-      padding: 0; 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    
-    html, body { 
-      height: 100%; 
-    }
-    
+
     body {
-      font-family: "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
       line-height: 1.6;
-      color: #111;
-      background: linear-gradient(135deg, #f9f9f9 0%, #e6f2ef 50%, #d4e9e2 100%);
-      -webkit-font-smoothing: antialiased;
-      display: flex;
-      flex-direction: column;
-      background-attachment: fixed;
+      color: var(--black);
+      overflow-x: hidden;
     }
 
-    /* Layout container (centered) */
-    .container {
-      width: 100%;
-      max-width: var(--container-max);
-      margin: 0 auto;
-      padding: 0 16px;
-    }
-
-    /* HEADER */
-    .site-header {
-      width: 100%;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--glass-border);
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      transition: var(--transition);
     }
 
-    .header-inner {
+    header.scrolled {
+      box-shadow: var(--shadow-lg);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .header-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: var(--gap);
-      padding: 14px 0;
+      height: 88px;
     }
 
-    /* Brand + nav */
-    .brand {
+    .logo-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 48px;
     }
 
-    #logo {
-      width: 50px;
-      height: 50px;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    .logo {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 52px;
+      height: 52px;
       transition: var(--transition);
-    }
-    
-    #logo:hover {
-      transform: scale(1.05);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
 
-    /* Desktop nav */
-    .top-nav {
-      display: none; /* mobile-first: hidden, shown on wider screens */
-      gap: 18px;
+    .logo:hover img {
+      transform: scale(1.08) rotate(5deg);
     }
 
-    .top-nav a {
+    .logo::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, var(--green-accent) 0%, transparent 70%);
+      opacity: 0;
+      transition: var(--transition);
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .logo:hover::after {
+      opacity: 0.2;
+    }
+
+    nav {
+      display: none;
+    }
+
+    nav a {
       text-decoration: none;
+      color: var(--black);
       font-weight: 700;
-      letter-spacing: 0.6px;
-      color: #111;
-      padding: 8px 16px;
-      border-radius: 20px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 50px;
       transition: var(--transition);
       position: relative;
       overflow: hidden;
     }
-    
-    .top-nav a::before {
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 112, 74, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      color: var(--green-primary);
+      background: var(--tan-light);
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      color: var(--green-primary);
+      background: var(--green-light);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .find-store {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 18px;
+      border-radius: 50px;
+      transition: var(--transition);
+      background: var(--white);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      letter-spacing: 0.5px;
+    }
+
+    .find-store:hover {
+      background: var(--tan-light);
+      border-color: var(--green-primary);
+      color: var(--green-primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .find-store i {
+      font-size: 16px;
+      transition: var(--transition-fast);
+    }
+
+    .find-store:hover i {
+      transform: scale(1.1);
+    }
+
+    .find-store span {
+      display: none;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      letter-spacing: 0.8px;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      min-width: 180px;
+    }
+
+    .btn::before {
       content: '';
       position: absolute;
       top: 0;
@@ -125,135 +217,270 @@
       width: 100%;
       height: 100%;
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-      transition: left 0.5s;
+      transition: left 0.6s;
     }
-    
-    .top-nav a:hover::before {
+
+    .btn:hover::before {
       left: 100%;
     }
-    
-    .top-nav a:hover { 
-      color: var(--green-dark); 
-      background: rgba(255, 255, 255, 0.5);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.4s, height 0.4s;
+      z-index: 0;
     }
 
-    /* Header actions */
-    .header-actions {
+    .btn:active::after {
+      width: 300px;
+      height: 300px;
+    }
+
+    .btn span,
+    .btn i {
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn-outline {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--black);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-outline:hover {
+      background: var(--black);
+      color: var(--white);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-solid {
+      background: linear-gradient(135deg, var(--black) 0%, #333 100%);
+      color: var(--white);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      border-color: var(--black);
+    }
+
+    .btn-solid:hover {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-primary) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 112, 74, 0.3);
+      border-color: var(--green-primary);
+    }
+
+    .btn i {
+      font-size: 14px;
+      transition: var(--transition-fast);
+    }
+
+    .btn:hover i {
+      transform: translateX(4px);
+    }
+
+    .card-content .btn {
+      margin-top: 12px;
+    }
+
+    .bg-green .btn-outline {
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--green-dark);
+      border-color: var(--white);
+      backdrop-filter: blur(10px);
+    }
+
+    .bg-green .btn-outline:hover {
+      background: var(--white);
+      color: var(--green-dark);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .bg-tan .btn-solid,
+    .bg-light-green .btn-solid,
+    .bg-gray .btn-solid {
+      background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-accent) 100%);
+      border-color: var(--green-primary);
+      box-shadow: 0 6px 20px rgba(0, 112, 74, 0.2);
+    }
+
+    .bg-tan .btn-solid:hover,
+    .bg-light-green .btn-solid:hover,
+    .bg-gray .btn-solid:hover {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-primary) 100%);
+      box-shadow: 0 10px 30px rgba(0, 112, 74, 0.35);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .menu-toggle {
+      background: var(--white);
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      font-size: 20px;
+      cursor: pointer;
+      padding: 10px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: center;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      transition: var(--transition);
     }
 
-    .store-link {
-      display: inline-flex;
+    .menu-toggle:hover {
+      background: var(--tan-light);
+      border-color: var(--green-primary);
+      color: var(--green-primary);
+      transform: rotate(90deg);
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 88px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      box-shadow: var(--shadow-lg);
+      padding: 24px 24px;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: var(--transition);
+      pointer-events: none;
+      max-height: calc(100vh - 88px);
+      overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .mobile-menu a {
+      display: flex;
       align-items: center;
-      gap: 8px;
+      padding: 18px 20px;
       text-decoration: none;
-      font-weight: 600;
-      color: #111;
-      padding: 8px 16px;
-      border-radius: 20px;
+      color: var(--black);
+      font-weight: 700;
+      font-size: 15px;
+      border-bottom: 1px solid var(--tan-light);
       transition: var(--transition);
-    }
-    
-    .store-link:hover {
-      color: var(--green-dark);
-      background: rgba(255, 255, 255, 0.5);
-    }
-    
-    .store-link .store-text { 
-      display: none; 
+      border-radius: 12px;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
     }
 
-    .head-btn {
-      border-radius: 40px;
-      padding: 10px 20px;
-      font-weight: 600;
-      background: transparent;
-      border: 1px solid transparent;
-      cursor: pointer;
-      transition: var(--transition);
+    .mobile-menu a:hover {
+      background: var(--green-light);
+      color: var(--green-primary);
+      transform: translateX(8px);
+      border-bottom-color: var(--green-primary);
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--green-light) 0%, var(--tan-light) 100%);
+      padding: 80px 24px;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
 
-    /* variants */
-    .head-btn.ghost { 
-      background: rgba(255, 255, 255, 0.5); 
-      border: 1px solid rgba(0, 0, 0, 0.1); 
-      color: #111; 
-      backdrop-filter: blur(5px);
-    }
-    
-    .head-btn.ghost:hover {
-      background: rgba(255, 255, 255, 0.8);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
-    }
-    
-    .head-btn.solid { 
-      background: var(--green-medium); 
-      color: #fff; 
-      border: 1px solid var(--green-medium);
-      box-shadow: 0 4px 12px rgba(0, 112, 74, 0.3);
-    }
-    
-    .head-btn.solid:hover {
-      background: var(--green-dark);
-      box-shadow: 0 6px 20px rgba(0, 112, 74, 0.4);
-      transform: translateY(-2px);
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(0, 112, 74, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
     }
 
-    .head-btn:active,
-    .head-btn:focus { 
-      transform: translateY(0); 
-      outline: none; 
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(212, 197, 160, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
     }
 
-    /* mobile nav toggle (hamburger) */
-    .nav-toggle {
-      display: inline-flex;
-      align-items: center;
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--white);
+      color: var(--green-primary);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 24px;
+      color: var(--green-dark);
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .hero p {
+      font-size: 19px;
+      margin-bottom: 36px;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(5px);
-      cursor: pointer;
-      margin-left: 4px;
-      transition: var(--transition);
-    }
-    
-    .nav-toggle:hover {
-      background: rgba(255, 255, 255, 0.8);
-      transform: rotate(90deg);
-    }
-    
-    .nav-toggle i { 
-      font-size: 18px; 
+      flex-wrap: wrap;
     }
 
-    /* MAIN SECTION */
-    .main-section {
-      padding: 30px 0;
-      flex: 1;
+    .card-grid {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 40px 20px;
     }
 
-    /* CARD */
     .card {
       display: flex;
       flex-direction: column;
-      gap: 0;
-      margin-bottom: 32px;
-      border-radius: var(--border-radius);
+      background: var(--white);
+      border-radius: 24px;
       overflow: hidden;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
+      margin-bottom: 40px;
       box-shadow: var(--shadow);
       transition: var(--transition);
       position: relative;
@@ -265,110 +492,294 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+      height: 3px;
+      background: linear-gradient(90deg, var(--green-primary), var(--green-accent));
+      opacity: 0;
+      transition: var(--transition);
     }
 
-    .card:hover { 
-      transform: translateY(-8px); 
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
       box-shadow: var(--shadow-hover);
+      transform: translateY(-8px);
     }
 
-    .card.reverse { 
-      flex-direction: column;
+    .card-image-wrapper {
+      position: relative;
+      overflow: hidden;
     }
 
-    .card-image,
+    .card-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .card:hover .card-image {
+      transform: scale(1.05);
+    }
+
+    .card-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      color: var(--green-dark);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: var(--shadow);
+      z-index: 10;
+    }
+
     .card-content {
-      min-height: 46vh;
+      padding: 48px 32px;
+      text-align: center;
+      position: relative;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--green-light);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 28px 18px;
+      margin: 0 auto 20px;
+      color: var(--green-primary);
+      font-size: 20px;
     }
 
-    /* background images */
-    .card-image {
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      width: 100%;
-      position: relative;
+    .card-content h2 {
+      font-size: 32px;
+      margin-bottom: 16px;
+      color: var(--green-dark);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
     }
-    
-    .card-image::after {
+
+    .card-content p {
+      font-size: 17px;
+      margin-bottom: 28px;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .card-content .btn-wrapper {
+      margin-top: 16px;
+    }
+
+    .card-features {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      margin: 28px 0 8px;
+      flex-wrap: wrap;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 600;
+      padding: 8px 16px;
+      background: rgba(0, 0, 0, 0.03);
+      border-radius: 50px;
+      transition: var(--transition);
+    }
+
+    .feature-item:hover {
+      background: rgba(0, 0, 0, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .feature-item i {
+      color: var(--green-primary);
+      font-size: 15px;
+    }
+
+    .bg-green .feature-item {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+    }
+
+    .bg-green .feature-item:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .bg-green .feature-item i {
+      color: var(--white);
+    }
+
+    .bg-green {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-primary) 100%);
+      color: var(--white);
+    }
+
+    .bg-green h2,
+    .bg-green p,
+    .bg-green .feature-item {
+      color: var(--white);
+    }
+
+    .bg-green .card-icon {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+    }
+
+    .bg-green .feature-item i {
+      color: var(--white);
+    }
+
+    .bg-tan {
+      background: linear-gradient(135deg, var(--tan-light) 0%, var(--tan-dark) 100%);
+    }
+
+    .bg-light-green {
+      background: linear-gradient(135deg, var(--green-light) 0%, #c8e4dc 100%);
+    }
+
+    .bg-gray {
+      background: var(--gray-light);
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--tan-light) 0%, #e8e4d8 100%);
+      padding: 80px 24px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, transparent 100%);
+      height: 4px;
+      background: linear-gradient(90deg, var(--green-primary), var(--green-accent), var(--green-primary));
     }
 
-    /* content */
-    .card-content {
-      text-align: center;
-      color: #fff;
-      padding: 36px 20px;
-      position: relative;
-      overflow: hidden;
+    .footer-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
     }
-    
-    .card-content::before {
+
+    .footer-column h3 {
+      font-size: 19px;
+      margin-bottom: 24px;
+      color: var(--green-dark);
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .footer-column h3::after {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-    
-    .card-content:hover::before {
-      opacity: 1;
-    }
-
-    .card-content h1 {
-      font-size: 28px;
-      line-height: 1.2;
-      margin-bottom: 16px;
-      letter-spacing: 0.5px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      position: relative;
-      z-index: 1;
-    }
-    
-    .card-content p {
-      font-size: 16px;
-      max-width: 680px;
-      margin: 0 auto 24px;
-      font-weight: 500;
-      color: rgba(255,255,255,0.95);
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-      position: relative;
-      z-index: 1;
-    }
-
-    /* buttons */
-    .button {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 999px;
-      text-decoration: none;
-      border: 1px solid rgba(255,255,255,0.9);
-      color: #fff;
-      font-weight: 700;
+      bottom: -8px;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--green-primary);
+      border-radius: 2px;
       transition: var(--transition);
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    
-    .button::before {
+
+    .footer-column:hover h3::after {
+      width: 100%;
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 14px;
+    }
+
+    .footer-column ul li a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-block;
+      position: relative;
+    }
+
+    .footer-column ul li a::before {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--green-primary);
+      transition: var(--transition);
+    }
+
+    .footer-column ul li a:hover {
+      color: var(--green-primary);
+      transform: translateX(5px);
+    }
+
+    .footer-column ul li a:hover::before {
+      width: 100%;
+    }
+
+    .footer-bottom {
+      max-width: 1440px;
+      margin: 48px auto 0;
+      padding-top: 40px;
+      border-top: 2px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .social-links a {
+      width: 44px;
+      height: 44px;
+      background: var(--green-primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .social-links a::before {
       content: '';
       position: absolute;
       top: 0;
@@ -378,622 +789,463 @@
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
       transition: left 0.5s;
     }
-    
-    .button:hover::before {
+
+    .social-links a:hover::before {
       left: 100%;
     }
-    
-    .button:hover { 
-      transform: translateY(-3px); 
-      color: var(--green-dark); 
-      background: #fff; 
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
 
-    .button.dark {
-      color: var(--green-dark);
-      background: rgba(255,255,255,0.95);
-      border-color: rgba(0,0,0,0.06);
-    }
-    
-    .button.dark:hover {
-      background: #fff;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    /* color classes */
-    .green { 
-      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green-medium) 100%);
-    }
-    
-    .tan { 
-      background: linear-gradient(135deg, var(--tan) 0%, #e8e8c9 100%);
-      color: var(--green-dark); 
-    }
-    
-    .lightgreen { 
-      background: linear-gradient(135deg, var(--green-medium) 0%, #008b5d 100%);
-    }
-
-    /* SMALL CARD variant (used in original) */
-    .card-image.small { min-height: 34vh; }
-    .card-content.small { min-height: 34vh; }
-    .card-content.small h1 { font-size: 22px; }
-    .card-content.small p { font-size: 15px; }
-
-    /* INFO CARD */
-    .info-card {
-      margin: 20px 0 40px;
-      padding: 24px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: var(--border-radius);
-      box-shadow: var(--shadow);
-      border: 1px solid var(--glass-border);
-    }
-    
-    .main-info { 
-      text-align: center; 
-      padding: 6px 12px; 
-    }
-    
-    .main-info p { 
-      font-size: 13px; 
-      color: #444; 
-      line-height: 1.6; 
-      margin: 10px 0; 
-    }
-
-    /* FOOTER */
-    .footer { 
-      padding: 30px 0 40px; 
-      color: #222; 
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-top: 1px solid var(--glass-border);
-    }
-    
-    .footer-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-    
-    .footer-column h4 { 
-      font-family: "Poppins", sans-serif; 
-      font-size: 18px; 
-      margin-bottom: 16px; 
-      font-weight: 600; 
-      color: var(--green-dark);
-      position: relative;
-      display: inline-block;
-    }
-    
-    .footer-column h4::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 30px;
-      height: 2px;
-      background: var(--green-medium);
-      transition: width 0.3s;
-    }
-    
-    .footer-column:hover h4::after {
-      width: 100%;
-    }
-    
-    .footer-column ul { 
-      list-style: none; 
-      padding: 0; 
-    }
-    
-    .footer-column ul li { 
-      margin-bottom: 10px; 
-    }
-    
-    .footer-column ul li a { 
-      color: #333; 
-      text-decoration: none; 
-      font-weight: 500; 
-      font-size: 14px; 
-      transition: var(--transition);
-      display: inline-block;
-      padding: 2px 0;
-    }
-    
-    .footer-column ul li a:hover { 
-      color: var(--green-medium);
-      transform: translateX(5px);
-    }
-
-    /* bottom footer */
-    .solid { 
-      border-top: 1px solid rgba(0, 0, 0, 0.1); 
-      margin-top: 30px; 
-    }
-    
-    .bottom-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding-top: 24px;
-    }
-    
-    .social-icons { 
-      display: flex; 
-      gap: 12px; 
-    }
-    
-    .social-icons a {
-      width: 40px; 
-      height: 40px; 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content:center;
-      background: var(--green-medium); 
-      color: #fff; 
-      border-radius: 50%; 
-      text-decoration: none; 
-      font-size: 16px;
-      transition: var(--transition);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    .social-icons a:hover { 
-      transform: translateY(-4px) scale(1.1); 
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); 
+    .social-links a:hover {
       background: var(--green-dark);
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: var(--shadow);
     }
 
-    .policy-links {
+    .footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 20px;
     }
-    
-    .policy-links a { 
-      color: #111; 
-      text-decoration: none; 
-      font-size: 13px; 
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 13px;
+      font-weight: 500;
       transition: var(--transition);
       padding: 4px 8px;
       border-radius: 4px;
     }
-    
-    .policy-links a:hover { 
-      color: var(--green-medium);
-      background: rgba(255, 255, 255, 0.5);
+
+    .footer-links a:hover {
+      color: var(--green-primary);
+      background: rgba(0, 112, 74, 0.05);
     }
 
-    .copyright { 
-      font-size: 13px; 
-      color: var(--muted); 
+    .copyright {
+      font-size: 13px;
+      color: var(--gray);
+      font-weight: 500;
     }
 
-    /* ===========================
-       RESPONSIVE BREAKPOINTS
-       mobile-first -> larger screens
-       ===========================*/
-
-    /* >= 480px : small devices */
-    @media (min-width: 480px) {
-      .container { 
-        padding: 0 20px; 
-      }
-      
-      .card-content h1 { 
-        font-size: 30px; 
-      }
-      
-      .card-content p { 
-        font-size: 17px; 
-      }
-      
-      .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* >= 640px : tablets */
-    @media (min-width: 640px) {
-      .card { 
-        border-radius: var(--border-radius); 
-      }
-      
-      .card-image, .card-content { 
-        min-height: 48vh; 
-      }
-      
-      .card-content h1 { 
-        font-size: 34px; 
-      }
-      
-      .card-content p { 
-        font-size: 18px; 
-      }
-      
-      .footer-container {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-
-    /* >= 768px : larger tablets */
     @media (min-width: 768px) {
-      .store-link .store-text { 
-        display: inline-block; 
-      }
-      
-      .footer-container {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    /* >= 900px : show desktop nav and two-column cards */
-    @media (min-width: 900px) {
-      .top-nav { 
-        display: flex; 
+      nav {
+        display: flex;
+        gap: 4px;
       }
 
-      .nav-toggle { 
-        display: none; 
+      .menu-toggle {
+        display: none;
       }
 
-      /* Two-column layout for cards */
+      .find-store span {
+        display: inline;
+      }
+
+      .header-container {
+        padding: 0 40px;
+      }
+
+      .hero {
+        padding: 100px 40px;
+      }
+
+      .hero h1 {
+        font-size: 56px;
+      }
+
+      .hero p {
+        font-size: 21px;
+      }
+
+      .btn {
+        padding: 16px 36px;
+        font-size: 15px;
+        min-width: 200px;
+      }
+
+      .btn i {
+        font-size: 15px;
+      }
+
       .card {
         flex-direction: row;
         align-items: stretch;
-        min-height: 66vh;
-      }
-      
-      .card.reverse { 
-        flex-direction: row-reverse; 
       }
 
-      .card-image, .card-content {
-        flex: 1 1 50%;
-        min-height: auto;
-        padding: 56px;
+      .card:nth-child(even) {
+        flex-direction: row-reverse;
       }
 
-      .card-image.small, .card-content.small { 
-        min-height: 45vh; 
+      .card-image-wrapper {
+        width: 50%;
       }
 
-      .card-content h1 { 
-        font-size: 42px; 
+      .card-image {
+        width: 100%;
+        height: 100%;
+        min-height: 450px;
       }
-      
-      .card-content p { 
-        font-size: 20px; 
-        max-width: 520px; 
+
+      .card-content {
+        width: 50%;
+        padding: 64px 48px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .footer-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .header-container {
+        padding: 0 80px;
+      }
+
+      .hero {
+        padding: 120px 80px;
+      }
+
+      .hero h1 {
+        font-size: 64px;
+      }
+
+      .card-grid {
+        padding: 80px 80px;
+      }
+
+      .card-content {
+        padding: 80px 64px;
+      }
+
+      .card-content h2 {
+        font-size: 38px;
+      }
+
+      .card-content p {
+        font-size: 18px;
       }
 
       .footer-container {
         grid-template-columns: repeat(5, 1fr);
       }
-
-      .bottom-footer {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .policy-links { 
-        gap: 20px; 
-      }
     }
 
-    /* >= 1100px : wider container spacing */
-    @media (min-width: 1100px) {
-      .container { 
-        padding: 0 36px; 
-      }
-      
-      header .container { 
-        padding: 0 18px; 
-      }
-    }
-
-    /* NAV small-screen behaviour */
-    #main-nav {
-      position: absolute;
-      top: 72px;
-      right: 18px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-      border-radius: var(--border-radius);
-      border: 1px solid var(--glass-border);
-      display: none;
-      flex-direction: column;
-      box-shadow: var(--shadow-hover);
-      min-width: 200px;
-      overflow: hidden;
-      z-index: 100;
-    }
-    
-    #main-nav.open { 
-      display: flex; 
-      animation: slideIn 0.3s ease-out;
-    }
-    
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    #main-nav a {
-      display: block;
-      padding: 14px 20px;
-      color: #111;
-      text-decoration: none;
-      font-weight: 600;
-      transition: var(--transition);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    #main-nav a:last-child {
-      border-bottom: none;
-    }
-    
-    #main-nav a:hover { 
-      background: rgba(255, 255, 255, 0.5); 
-      padding-left: 24px;
-    }
-
-    /* Accessibility focus styles */
-    a:focus, button:focus { 
-      outline: 3px solid rgba(0, 112, 74, 0.3); 
-      outline-offset: 2px; 
-    }
-
-    /* Small fixes for very small devices */
-    @media (max-width: 420px) {
-      .card-content h1 { 
-        font-size: 24px; 
-      }
-      
-      .card-content p { 
-        font-size: 14px; 
-        margin-bottom: 16px; 
-      }
-      
-      .container { 
-        padding: 0 12px; 
-      }
-      
-      .header-inner { 
-        gap: 8px; 
-      }
-      
-      .head-btn { 
-        padding: 8px 14px; 
-        font-size: 13px; 
-      }
-      
-      .store-link { 
-        font-size: 13px; 
-      }
-      
-      .footer-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .policy-links {
-        flex-direction: column;
-        gap: 8px;
+    @media (min-width: 1280px) {
+      .card-image {
+        min-height: 500px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <div class="brand">
-        <a href="#" aria-label="Starbucks home">
-          <img id="logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks logo">
+  <header>
+    <div class="header-container">
+      <div class="logo-nav">
+        <a href="#" class="logo">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/Starbucks_Corporation_Logo_2011.svg/1200px-Starbucks_Corporation_Logo_2011.svg.png" alt="Starbucks">
         </a>
-        <nav class="top-nav" id="main-nav" aria-label="Primary">
+        <nav>
           <a href="#">Menu</a>
           <a href="#">Rewards</a>
           <a href="#">Gift Cards</a>
         </nav>
       </div>
-
       <div class="header-actions">
-        <a class="store-link" href="#" aria-label="Find a store">
-          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-          <span class="store-text">Find a store</span>
+        <a href="#" class="find-store">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Find a store</span>
         </a>
-
-        <button class="head-btn ghost" id="btn-signin">Sign in</button>
-        <button class="head-btn solid" id="btn-signup">Join now</button>
-
-        <button id="nav-toggle" class="nav-toggle" aria-controls="main-nav" aria-expanded="false" aria-label="Open menu">
+        <a href="#" class="btn btn-outline">Sign in</a>
+        <a href="#" class="btn btn-solid">Join now</a>
+        <button class="menu-toggle" onclick="toggleMenu()">
           <i class="fas fa-bars"></i>
         </button>
       </div>
     </div>
   </header>
 
-  <main class="main-section container">
-    <!-- Card 1 -->
-    <section class="card">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99412.jpg');" role="img" aria-label="Patio and drinks"></div>
-      <div class="card-content green">
-        <h1>See you on the patio</h1>
-        <p>Soak up the season with Summer–Berry Refreshers and Iced Horchata Oatmilk Shaken Espresso. Enjoy these cool favorites while you can. Here for a limited time.</p>
-        <a href="#" class="button">View the menu</a>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">Menu</a>
+    <a href="#">Rewards</a>
+    <a href="#">Gift Cards</a>
+  </div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">New Arrivals</span>
+      <h1>Welcome to Starbucks</h1>
+      <p>Discover your perfect coffee moment with our handcrafted beverages, premium coffee experience, and exclusive rewards program</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-solid">Explore Menu <i class="fas fa-arrow-right"></i></a>
+        <a href="#" class="btn btn-outline">Join Rewards <i class="fas fa-star"></i></a>
       </div>
-    </section>
-
-    <!-- Card 2 -->
-    <section class="card reverse">
-      <div class="card-image small" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98124.jpg');" role="img" aria-label="Rewards free handcrafted drink"></div>
-      <div class="card-content tan small">
-        <h1>It starts with free</h1>
-        <p>Enjoy a <strong>free handcrafted drink</strong> when you make a qualifying purchase during your first week as a Starbucks® Rewards member.</p>
-        <a href="#" class="button dark">Join now</a>
-      </div>
-    </section>
-
-    <!-- Card 3 -->
-    <section class="card">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98053.jpg');" role="img" aria-label="Order ahead at airports"></div>
-      <div class="card-content green">
-        <h1>Order ahead. Pick up and fly.</h1>
-        <p>Make summer travel more chill with the Starbucks® app. Just find a store at an airport, order your favorites, pick up and go.</p>
-        <a href="#" class="button">Find a store</a>
-      </div>
-    </section>
-
-    <!-- Card 4 -->
-    <section class="card reverse">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98046.jpg');" role="img" aria-label="FARM Rio collaboration"></div>
-      <div class="card-content green">
-        <h1>FARM Rio + Starbucks®</h1>
-        <p>We've teamed up with Brazilian fashion brand FARM Rio for an exclusive merch collection inspired by the beauty and culture of Rio de Janeiro.</p>
-        <a href="#" class="button">Learn more</a>
-      </div>
-    </section>
-
-    <!-- Card 5 -->
-    <section class="card">
-      <div class="card-image" style="background-image: url('https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99432.jpg');" role="img" aria-label="Free refills while you stay"></div>
-      <div class="card-content lightgreen">
-        <h1>Free refills while you stay</h1>
-        <p>When you stay to enjoy your handcrafted or brewed drink in the café, refills of hot and iced brewed coffee or tea are on us.</p>
-        <a href="#" class="button">Learn more</a>
-      </div>
-    </section>
-  </main>
-
-  <section class="info-card container">
-    <div class="main-info">
-      <p id="first-info">
-        *Valid for new Starbucks Rewards members for 7 days from sign up. Coupon will be available in the offers tab of your Starbucks app following sign up and may take up to 48 hours to arrive. Good at participating U.S. stores for a handcrafted menu-sized beverage with qualifying purchase ($8 max value). Qualifying purchase excludes alcohol, Starbucks Card and Card reloads. Limit one. Cannot be combined with other offers or discounts. Excludes delivery services. Sign up by 9/28/2025.*
-      </p>
-
-      <p id="second-info">
-        **Free refills of hot and iced brewed coffee or tea during same store visit. Excludes Cold Brew, Nitro Cold Brew, Iced Tea Lemonade, and flavored Iced Tea and Starbucks Refreshers® base. At participating stores. Visit starbucks.com/refills to learn more.**
-      </p>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container footer-container">
+  <section class="card-grid">
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-99412.jpg" alt="Summer drinks" class="card-image">
+        <span class="card-badge">Limited Time</span>
+      </div>
+      <div class="card-content bg-green">
+        <div class="card-icon">
+          <i class="fas fa-sun"></i>
+        </div>
+        <h2>Summer Refreshers</h2>
+        <p>Cool down with our refreshing summer beverages. Featuring berry-infused drinks and iced espresso creations perfect for warm days.</p>
+        <div class="card-features">
+          <div class="feature-item">
+            <i class="fas fa-check-circle"></i>
+            <span>Fresh Ingredients</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-leaf"></i>
+            <span>Natural Flavors</span>
+          </div>
+        </div>
+        <a href="#" class="btn btn-outline"><span>Order Now</span> <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98124.jpg" alt="Rewards" class="card-image">
+        <span class="card-badge">New Members</span>
+      </div>
+      <div class="card-content bg-tan">
+        <div class="card-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h2>Join Starbucks Rewards</h2>
+        <p>Earn free drinks and food with every purchase. Get a free handcrafted drink when you join as a new member.</p>
+        <div class="card-features">
+          <div class="feature-item">
+            <i class="fas fa-gift"></i>
+            <span>Free Birthday Reward</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span>Mobile Ordering</span>
+          </div>
+        </div>
+        <a href="#" class="btn btn-solid"><span>Sign Up Free</span> <i class="fas fa-crown"></i></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98053.jpg" alt="Mobile order" class="card-image">
+        <span class="card-badge">Convenient</span>
+      </div>
+      <div class="card-content bg-light-green">
+        <div class="card-icon">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <h2>Order Ahead</h2>
+        <p>Skip the line and order your favorites through our mobile app. Pick up at your convenience at any location.</p>
+        <div class="card-features">
+          <div class="feature-item">
+            <i class="fas fa-clock"></i>
+            <span>Save Time</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Any Location</span>
+          </div>
+        </div>
+        <a href="#" class="btn btn-solid"><span>Download App</span> <i class="fas fa-download"></i></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-image-wrapper">
+        <img src="https://content-prod-live.cert.starbucks.com/binary/v2/asset/137-98046.jpg" alt="Merchandise" class="card-image">
+        <span class="card-badge">Exclusive</span>
+      </div>
+      <div class="card-content bg-gray">
+        <div class="card-icon">
+          <i class="fas fa-shopping-bag"></i>
+        </div>
+        <h2>Exclusive Merchandise</h2>
+        <p>Discover our latest collection of tumblers, mugs, and accessories. Perfect for coffee lovers and collectors.</p>
+        <div class="card-features">
+          <div class="feature-item">
+            <i class="fas fa-palette"></i>
+            <span>Unique Designs</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-recycle"></i>
+            <span>Eco-Friendly</span>
+          </div>
+        </div>
+        <a href="#" class="btn btn-solid"><span>Shop Now</span> <i class="fas fa-shopping-cart"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-container">
       <div class="footer-column">
-        <h4>About Us</h4>
+        <h3>About Us</h3>
         <ul>
           <li><a href="#">Our Company</a></li>
           <li><a href="#">Our Coffee</a></li>
-          <li><a href="#">About Starbucks</a></li>
-          <li><a href="#">Starbucks Archive</a></li>
-          <li><a href="#">Investor Relations</a></li>
+          <li><a href="#">Stories and News</a></li>
           <li><a href="#">Customer Service</a></li>
-          <li><a href="#">Contact Us</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
-        <h4>Careers</h4>
+        <h3>Careers</h3>
         <ul>
           <li><a href="#">Culture and Values</a></li>
-          <li><a href="#">Belonging at Starbucks</a></li>
+          <li><a href="#">Inclusion and Diversity</a></li>
           <li><a href="#">College Achievement Plan</a></li>
-          <li><a href="#">Alumni Community</a></li>
-          <li><a href="#">U.S Careers</a></li>
-          <li><a href="#">International Careers</a></li>
+          <li><a href="#">U.S. Careers</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
-        <h4>Social Impact</h4>
+        <h3>Social Impact</h3>
         <ul>
-          <li><a href="#">Communities</a></li>
-          <li><a href="#">Starbucks Foundation</a></li>
           <li><a href="#">Sustainability</a></li>
-          <li><a href="#">Environmental and Social Impact Reporting</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Ethical Sourcing</a></li>
+          <li><a href="#">Environmental Goals</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
-        <h4>For Business Partners</h4>
+        <h3>For Partners</h3>
         <ul>
-          <li><a href="#">Landlord Support Center</a></li>
+          <li><a href="#">Landlord Support</a></li>
           <li><a href="#">Suppliers</a></li>
-          <li><a href="#">Corporate Gift Card Sales</a></li>
-          <li><a href="#">Office and Foodservice Coffee</a></li>
+          <li><a href="#">Corporate Sales</a></li>
+          <li><a href="#">Office Coffee</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
-        <h4>Order and Pick Up</h4>
+        <h3>Order & Pickup</h3>
         <ul>
           <li><a href="#">Order on the App</a></li>
           <li><a href="#">Order on the Web</a></li>
           <li><a href="#">Delivery</a></li>
-          <li><a href="#">Order and Pick Up Options</a></li>
-          <li><a href="#">Explore and Find Coffee for Home</a></li>
+          <li><a href="#">Order Options</a></li>
         </ul>
       </div>
     </div>
 
-    <hr class="solid">
-
-    <div class="bottom-footer container">
-      <div class="social-icons" aria-hidden="false" aria-label="Social links">
-        <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
-        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
-        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+    <div class="footer-bottom">
+      <div class="social-links">
+        <a href="#"><i class="fab fa-spotify"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-pinterest"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
       </div>
-
-      <div class="policy-links">
-        <a href="#">Privacy Notice</a>
-        <a href="#">Consumer Health Privacy Notice</a>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
         <a href="#">Terms of Use</a>
-        <a href="#">Do Not Share My Personal Information</a>
         <a href="#">CA Supply Chain Act</a>
-        <a href="#">Accessibility</a>
         <a href="#">Cookie Preferences</a>
       </div>
-
       <div class="copyright">
         © 2025 Starbucks Coffee Company. All rights reserved.
       </div>
     </div>
   </footer>
 
-  <!-- Small JavaScript for mobile nav toggle -->
   <script>
-    const navToggle = document.getElementById('nav-toggle');
-    const mainNav = document.getElementById('main-nav');
+    function toggleMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('active');
+    }
 
-    navToggle.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-      navToggle.setAttribute('aria-expanded', String(!expanded));
-      mainNav.classList.toggle('open');
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      lastScroll = currentScroll;
     });
 
-    // Close nav on larger resize
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 900) {
-        mainNav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('mobileMenu');
+      const toggle = document.querySelector('.menu-toggle');
+      
+      if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        menu.classList.remove('active');
       }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        observer.observe(card);
+      });
+    });
+
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
+        }
+      });
     });
   </script>
 </body>
